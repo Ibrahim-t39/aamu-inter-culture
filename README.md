@@ -72,9 +72,9 @@ This project is deployed on [Vercel](https://vercel.com). Any changes pushed to 
 
 For any questions or concerns about this project, please contact:
 
-**[Your Name]**  
+**Thabo Ibrahim Traore**  
 ISA Webmaster  
-[Your Email]
+[traorethabo39@gmail.com]
 
 ## License
 
