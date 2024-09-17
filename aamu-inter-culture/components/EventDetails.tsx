@@ -1,5 +1,5 @@
-// app/components/EventDetails.tsx
 import { format } from "date-fns";
+import { aamuColors, eventColors } from "../lib/constant/constant";
 import { Event } from "./types";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
@@ -25,12 +25,22 @@ export function EventDetails({
   toggleStarred,
   toggleAttending,
 }: EventDetailsProps) {
+  const eventColor = eventColors[event.category] || eventColors.default;
+
   return (
-    <DialogContent>
+    <DialogContent
+      className="sm:max-w-[425px]"
+      style={{ borderTop: `4px solid ${eventColor}` }}
+    >
       <DialogHeader>
-        <DialogTitle>{event.title}</DialogTitle>
+        <DialogTitle
+          className="text-2xl font-bold"
+          style={{ color: aamuColors.primary }}
+        >
+          {event.title}
+        </DialogTitle>
         <DialogDescription>
-          <div className="mt-4">
+          <div className="mt-4 space-y-2">
             <p>
               <strong>Date:</strong> {format(event.date, "MMMM d, yyyy")}
             </p>
@@ -56,7 +66,14 @@ export function EventDetails({
               <strong>Tags:</strong>
               <div className="flex flex-wrap gap-2 mt-2">
                 {event.tags.map((tag: string) => (
-                  <Badge key={tag} variant="secondary">
+                  <Badge
+                    key={tag}
+                    variant="secondary"
+                    style={{
+                      backgroundColor: `${eventColor}40`,
+                      color: aamuColors.primary,
+                    }}
+                  >
                     {tag}
                   </Badge>
                 ))}
@@ -66,10 +83,25 @@ export function EventDetails({
         </DialogDescription>
       </DialogHeader>
       <div className="flex justify-between mt-4">
-        <Button variant="outline" onClick={() => toggleStarred(event.id)}>
+        <Button
+          variant="outline"
+          onClick={() => toggleStarred(event.id)}
+          style={{
+            borderColor: aamuColors.primary,
+            color: isStarred ? "white" : aamuColors.primary,
+            backgroundColor: isStarred ? aamuColors.primary : "transparent",
+          }}
+        >
           {isStarred ? "Unstar" : "Star"}
         </Button>
-        <Button onClick={() => toggleAttending(event.id)}>
+        <Button
+          onClick={() => toggleAttending(event.id)}
+          style={{
+            borderColor: aamuColors.secondary,
+            color: isAttending ? "white" : aamuColors.secondary,
+            backgroundColor: isAttending ? aamuColors.secondary : "transparent",
+          }}
+        >
           {isAttending ? "Cancel Attendance" : "Attend"}
         </Button>
       </div>

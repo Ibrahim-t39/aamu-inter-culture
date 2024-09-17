@@ -1,4 +1,3 @@
-// app/types.ts
 import { eventIcons } from "../lib/constant/constant";
 
 export interface Event {

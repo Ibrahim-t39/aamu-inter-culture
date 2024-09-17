@@ -1,7 +1,12 @@
 import { format } from "date-fns";
 import { CalendarIcon, Filter } from "lucide-react";
-import { categories, eventTypes, organizers } from "../lib/constant/constant";
-import { cn } from "../lib/utils";
+import {
+  aamuColors,
+  categories,
+  eventTypes,
+  organizers,
+} from "../lib/constant/constant";
+import { cn } from "../lib/utils/utils";
 import { Button } from "./ui/button";
 import { Calendar } from "./ui/calendar";
 import { Input } from "./ui/input";
@@ -50,6 +55,7 @@ export function EventFilters({
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="w-full"
+          style={{ borderColor: aamuColors.primary }}
         />
       </div>
       <Popover>
@@ -60,6 +66,10 @@ export function EventFilters({
               "w-[240px] justify-start text-left font-normal",
               !date && "text-muted-foreground"
             )}
+            style={{
+              borderColor: aamuColors.primary,
+              color: aamuColors.primary,
+            }}
           >
             <CalendarIcon className="mr-2 h-4 w-4" />
             {date ? format(date, "PPP") : <span>Pick a date</span>}
@@ -76,7 +86,10 @@ export function EventFilters({
       </Popover>
 
       <Select onValueChange={setCategory}>
-        <SelectTrigger className="w-[180px]">
+        <SelectTrigger
+          className="w-[180px]"
+          style={{ borderColor: aamuColors.primary, color: aamuColors.primary }}
+        >
           <SelectValue placeholder="Select category" />
         </SelectTrigger>
         <SelectContent>
@@ -89,7 +102,10 @@ export function EventFilters({
       </Select>
 
       <Select onValueChange={setEventType}>
-        <SelectTrigger className="w-[180px]">
+        <SelectTrigger
+          className="w-[180px]"
+          style={{ borderColor: aamuColors.primary, color: aamuColors.primary }}
+        >
           <SelectValue placeholder="Select event type" />
         </SelectTrigger>
         <SelectContent>
@@ -102,7 +118,10 @@ export function EventFilters({
       </Select>
 
       <Select onValueChange={setOrganizer}>
-        <SelectTrigger className="w-[180px]">
+        <SelectTrigger
+          className="w-[180px]"
+          style={{ borderColor: aamuColors.primary, color: aamuColors.primary }}
+        >
           <SelectValue placeholder="Select organizer" />
         </SelectTrigger>
         <SelectContent>
@@ -123,6 +142,7 @@ export function EventFilters({
           variant="ghost"
           onClick={clearFilters}
           className="flex items-center"
+          style={{ color: aamuColors.primary }}
         >
           <Filter className="mr-2 h-4 w-4" />
           Clear filters

@@ -12,7 +12,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "../../components/ui/tabs";
-import { events } from "../../lib/constant/constant";
+import { aamuColors, events } from "../../lib/constant/constant";
 
 export default function EventsPage() {
   const [date, setDate] = useState<Date | undefined>();
@@ -86,8 +86,14 @@ export default function EventsPage() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold text-center mb-8 text-[#660000]">
+    <div
+      className="container mx-auto px-4 py-8"
+      style={{ backgroundColor: aamuColors.background }}
+    >
+      <h1
+        className="text-4xl font-bold text-center mb-8"
+        style={{ color: aamuColors.primary }}
+      >
         Campus Events
       </h1>
 
@@ -108,10 +114,19 @@ export default function EventsPage() {
       <EventTags selectedTags={selectedTags} toggleTag={toggleTag} />
 
       <Tabs defaultValue="all" className="mb-8">
-        <TabsList>
-          <TabsTrigger value="all">All Events</TabsTrigger>
-          <TabsTrigger value="starred">Starred Events</TabsTrigger>
-          <TabsTrigger value="attending">Attending Events</TabsTrigger>
+        <TabsList
+          className="w-full justify-start"
+          style={{ backgroundColor: `${aamuColors.primary}20` }}
+        >
+          <TabsTrigger value="all" style={{ color: aamuColors.primary }}>
+            All Events
+          </TabsTrigger>
+          <TabsTrigger value="starred" style={{ color: aamuColors.primary }}>
+            Starred Events
+          </TabsTrigger>
+          <TabsTrigger value="attending" style={{ color: aamuColors.primary }}>
+            Attending Events
+          </TabsTrigger>
         </TabsList>
         <TabsContent value="all">
           {filteredEvents.length === 0 ? (

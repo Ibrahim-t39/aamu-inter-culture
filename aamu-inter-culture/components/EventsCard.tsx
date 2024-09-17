@@ -1,7 +1,6 @@
-// app/components/EventCard.tsx
 import { format } from "date-fns";
 import { AlertCircle, Cake, MapPin, School, Star, Users } from "lucide-react";
-import { eventIcons } from "../lib/constant/constant";
+import { aamuColors, eventColors, eventIcons } from "../lib/constant/constant";
 import { cn } from "../lib/utils/utils";
 import { EventDetails } from "./EventDetails";
 import { Event } from "./types";
@@ -33,10 +32,14 @@ export function EventCard({
   toggleAttending,
 }: EventCardProps) {
   const IconComponent = eventIcons[event.icon];
+  const eventColor = eventColors[event.category] || eventColors.default;
 
   return (
-    <Card className="flex flex-col">
-      <CardHeader>
+    <Card
+      className="flex flex-col"
+      style={{ borderTop: `4px solid ${eventColor}` }}
+    >
+      <CardHeader style={{ backgroundColor: `${eventColor}20` }}>
         <div className="flex justify-between items-start">
           <CardTitle className="text-[#660000]">{event.title}</CardTitle>
           <IconComponent className="h-6 w-6 text-gray-400" />
@@ -59,14 +62,26 @@ export function EventCard({
         </div>
         <div className="mt-2 flex flex-wrap gap-2">
           {event.tags.map((tag: string) => (
-            <Badge key={tag} variant="secondary">
+            <Badge
+              key={tag}
+              variant="secondary"
+              style={{
+                backgroundColor: `${eventColor}40`,
+                color: aamuColors.primary,
+              }}
+            >
               {tag}
             </Badge>
           ))}
         </div>
       </CardContent>
-      <CardFooter className="flex flex-wrap justify-between items-center gap-2">
-        <Badge>{event.category}</Badge>
+      <CardFooter
+        className="flex flex-wrap justify-between items-center gap-2"
+        style={{ backgroundColor: `${eventColor}10` }}
+      >
+        <Badge style={{ backgroundColor: eventColor, color: "white" }}>
+          {event.category}
+        </Badge>
         <div className="flex gap-2">
           {event.isKeyEvent && (
             <Star className="h-4 w-4 text-yellow-500" aria-label="Key Event" />
@@ -86,6 +101,11 @@ export function EventCard({
             variant={isStarred ? "secondary" : "outline"}
             size="sm"
             onClick={() => toggleStarred(event.id)}
+            style={{
+              borderColor: aamuColors.primary,
+              color: isStarred ? "white" : aamuColors.primary,
+              backgroundColor: isStarred ? aamuColors.primary : "transparent",
+            }}
           >
             <Star
               className={cn("h-4 w-4 mr-1", isStarred ? "fill-current" : "")}
@@ -96,12 +116,26 @@ export function EventCard({
             variant={isAttending ? "secondary" : "outline"}
             size="sm"
             onClick={() => toggleAttending(event.id)}
+            style={{
+              borderColor: aamuColors.secondary,
+              color: isAttending ? "white" : aamuColors.secondary,
+              backgroundColor: isAttending
+                ? aamuColors.secondary
+                : "transparent",
+            }}
           >
             {isAttending ? "Attending" : "Attend"}
           </Button>
           <Dialog>
             <DialogTrigger asChild>
-              <Button variant="outline" size="sm">
+              <Button
+                variant="outline"
+                size="sm"
+                style={{
+                  borderColor: aamuColors.primary,
+                  color: aamuColors.primary,
+                }}
+              >
                 Details
               </Button>
             </DialogTrigger>
