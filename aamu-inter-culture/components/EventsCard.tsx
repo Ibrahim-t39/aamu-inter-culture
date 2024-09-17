@@ -1,18 +1,11 @@
+// app/components/EventCard.tsx
 import { format } from "date-fns";
-import {
-  AlertCircle,
-  Cake,
-  LucideIcon,
-  MapPin,
-  School,
-  Star,
-  Users,
-} from "lucide-react";
-import { Badge } from "../../components/ui/badge";
+import { AlertCircle, Cake, MapPin, School, Star, Users } from "lucide-react";
 import { eventIcons } from "../lib/constant/constant";
 import { cn } from "../lib/utils/utils";
 import { EventDetails } from "./EventDetails";
 import { Event } from "./types";
+import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import {
   Card,
@@ -39,8 +32,7 @@ export function EventCard({
   toggleStarred,
   toggleAttending,
 }: EventCardProps) {
-  const IconComponent: LucideIcon =
-    eventIcons[event.icon as keyof typeof eventIcons] || eventIcons.default;
+  const IconComponent = eventIcons[event.icon];
 
   return (
     <Card className="flex flex-col">

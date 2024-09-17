@@ -371,7 +371,7 @@ const ContactAndNewsletterSection = () => {
                   </div>
                   <p className="mt-4 text-gray-600">
                     Have questions or need assistance? Reach out to our E-Board
-                    or DSO team. We're here to help!
+                    or DSO team. We&apos;re here to help!
                   </p>
                 </div>
                 <div className="border-t pt-6">
