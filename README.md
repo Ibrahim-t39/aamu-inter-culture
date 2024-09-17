@@ -64,10 +64,6 @@ We welcome contributions from the AAMU community! If you'd like to contribute, p
 3. **Make your changes and commit them**.
 4. **Create a pull request** with a description of your changes.
 
-## Deployment
-
-This project is deployed on [Vercel](https://vercel.com). Any changes pushed to the main branch will automatically trigger a new deployment.
-
 ## Contact
 
 For any questions or concerns about this project, please contact:
