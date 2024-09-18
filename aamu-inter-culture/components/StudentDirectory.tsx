@@ -20,12 +20,20 @@ export function StudentDirectory() {
   const [selectedMajor, setSelectedMajor] = useState("All");
   const [selectedYear, setSelectedYear] = useState("All");
   const [selectedNationality, setSelectedNationality] = useState("All");
+  const [selectedGender, setSelectedGender] = useState("All");
 
   const nationalities = useMemo(() => {
     const nationalitySet = new Set<string>(
       students.map((student) => student.nationality)
     );
     return ["All", ...Array.from(nationalitySet)].sort();
+  }, []);
+
+  const genders = useMemo(() => {
+    const genderSet = new Set<string>(
+      students.map((student) => student.gender)
+    );
+    return ["All", ...Array.from(genderSet)].sort();
   }, []);
 
   const filteredStudents = useMemo(() => {
@@ -39,9 +47,19 @@ export function StudentDirectory() {
       const nationalityMatch =
         selectedNationality === "All" ||
         student.nationality === selectedNationality;
-      return nameMatch && majorMatch && yearMatch && nationalityMatch;
+      const genderMatch =
+        selectedGender === "All" || student.gender === selectedGender;
+      return (
+        nameMatch && majorMatch && yearMatch && nationalityMatch && genderMatch
+      );
     });
-  }, [searchQuery, selectedMajor, selectedYear, selectedNationality]);
+  }, [
+    searchQuery,
+    selectedMajor,
+    selectedYear,
+    selectedNationality,
+    selectedGender,
+  ]);
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -65,12 +83,12 @@ export function StudentDirectory() {
           placeholder="Search students..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="flex-grow"
+          className="flex-grow bg-white bg-opacity-80"
           style={{ borderColor: aamuColors.primary }}
         />
         <Select onValueChange={setSelectedMajor}>
           <SelectTrigger
-            className="w-[180px]"
+            className="w-[180px] bg-white bg-opacity-80"
             style={{ borderColor: aamuColors.primary }}
           >
             <SelectValue placeholder="Select major" />
@@ -85,7 +103,7 @@ export function StudentDirectory() {
         </Select>
         <Select onValueChange={setSelectedYear}>
           <SelectTrigger
-            className="w-[180px]"
+            className="w-[180px] bg-white bg-opacity-80"
             style={{ borderColor: aamuColors.primary }}
           >
             <SelectValue placeholder="Select year" />
@@ -100,7 +118,7 @@ export function StudentDirectory() {
         </Select>
         <Select onValueChange={setSelectedNationality}>
           <SelectTrigger
-            className="w-[180px]"
+            className="w-[180px] bg-white bg-opacity-80"
             style={{ borderColor: aamuColors.primary }}
           >
             <SelectValue placeholder="Select nationality" />
@@ -109,6 +127,21 @@ export function StudentDirectory() {
             {nationalities.map((nationality) => (
               <SelectItem key={nationality} value={nationality}>
                 {nationality}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <Select onValueChange={setSelectedGender}>
+          <SelectTrigger
+            className="w-[180px] bg-white bg-opacity-80"
+            style={{ borderColor: aamuColors.primary }}
+          >
+            <SelectValue placeholder="Select gender" />
+          </SelectTrigger>
+          <SelectContent>
+            {genders.map((gender) => (
+              <SelectItem key={gender} value={gender}>
+                {gender}
               </SelectItem>
             ))}
           </SelectContent>
@@ -141,7 +174,7 @@ export function StudentDirectory() {
         ))}
       </motion.div>
       {filteredStudents.length === 0 && (
-        <p className="text-center text-gray-500 mt-8">
+        <p className="text-center text-gray-700 mt-8 bg-white bg-opacity-80 p-4 rounded">
           No students found matching the criteria.
         </p>
       )}

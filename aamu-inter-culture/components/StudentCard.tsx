@@ -11,9 +11,9 @@ import {
   Mail,
   MapPin,
   Palette,
-  Star,
   Tv,
   Twitter,
+  User,
   Utensils,
 } from "lucide-react";
 import Image from "next/image";
@@ -55,8 +55,8 @@ export function StudentCard({ student }: StudentCardProps) {
           }}
         >
           <CardContent className="p-6 flex flex-col h-full text-white">
-            <div className="flex items-center mb-4">
-              <div className="relative h-20 w-20 rounded-full overflow-hidden mr-4">
+            <div className="flex items-start mb-6">
+              <div className="relative h-24 w-24 rounded-full overflow-hidden mr-4 border-4 border-white shadow-lg">
                 <Image
                   src={student.image}
                   alt={student.name}
@@ -64,40 +64,57 @@ export function StudentCard({ student }: StudentCardProps) {
                   objectFit="cover"
                 />
               </div>
-              <div>
-                <h3 className="text-2xl font-bold">{student.name}</h3>
-                <p className="text-sm flex items-center">
+              <div className="flex-grow">
+                <h3 className="text-3xl font-bold mb-1">{student.name}</h3>
+                <p className="text-sm flex items-center mb-1">
                   <Mail className="h-4 w-4 mr-1" /> {student.email}
                 </p>
+                <p className="text-sm flex items-center">
+                  <User className="h-4 w-4 mr-1" /> {student.pronouns}
+                </p>
               </div>
-              <Image
-                src={`https://flagcdn.com/w20/${student.nationality.toLowerCase()}.png`}
-                alt={`${student.nationality} flag`}
-                width={20}
-                height={15}
-                className="ml-auto"
-              />
+              <div className="flex-shrink-0 ml-4">
+                <Image
+                  src={`https://flagcdn.com/w80/${student.nationality.toLowerCase()}.png`}
+                  alt={`${student.nationality} flag`}
+                  width={80}
+                  height={60}
+                  className="rounded-md shadow-md"
+                />
+              </div>
             </div>
-            <div className="grid grid-cols-2 gap-4 mb-4">
-              <div className="flex items-center">
-                <GraduationCap className="h-5 w-5 mr-2" />
-                <span>{student.major}</span>
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              <div className="bg-white bg-opacity-20 rounded-lg p-3">
+                <div className="flex items-center text-sm font-semibold mb-1">
+                  <GraduationCap className="h-5 w-5 mr-2" />
+                  <span>Major</span>
+                </div>
+                <p className="text-sm">{student.major}</p>
               </div>
-              <div className="flex items-center">
-                <Book className="h-5 w-5 mr-2" />
-                <span>{student.year}</span>
+              <div className="bg-white bg-opacity-20 rounded-lg p-3">
+                <div className="flex items-center text-sm font-semibold mb-1">
+                  <Book className="h-5 w-5 mr-2" />
+                  <span>Year</span>
+                </div>
+                <p className="text-sm">{student.year}</p>
               </div>
-              <div className="flex items-center">
-                <MapPin className="h-5 w-5 mr-2" />
-                <span>{student.country}</span>
+              <div className="bg-white bg-opacity-20 rounded-lg p-3">
+                <div className="flex items-center text-sm font-semibold mb-1">
+                  <MapPin className="h-5 w-5 mr-2" />
+                  <span>Country</span>
+                </div>
+                <p className="text-sm">{student.country}</p>
               </div>
-              <div className="flex items-center">
-                <Star className="h-5 w-5 mr-2" />
-                <span>{student.gpa.toFixed(1)}</span>
+              <div className="bg-white bg-opacity-20 rounded-lg p-3">
+                <div className="flex items-center text-sm font-semibold mb-1">
+                  <User className="h-5 w-5 mr-2" />
+                  <span>Gender</span>
+                </div>
+                <p className="text-sm">{student.gender}</p>
               </div>
             </div>
             <Badge
-              className="mb-4 self-start"
+              className="mb-4 self-start px-3 py-1"
               style={{
                 backgroundColor: aamuColors.secondary,
                 color: aamuColors.primary,
@@ -105,7 +122,9 @@ export function StudentCard({ student }: StudentCardProps) {
             >
               {student.funFact}
             </Badge>
-            <p className="text-sm mt-auto">Click to see more details</p>
+            <p className="text-sm mt-auto text-center italic">
+              Click to see more details
+            </p>
           </CardContent>
         </Card>
 
@@ -119,6 +138,12 @@ export function StudentCard({ student }: StudentCardProps) {
         >
           <CardContent className="p-6 flex flex-col h-full text-white">
             <h3 className="text-2xl font-bold mb-4">{student.name}</h3>
+            {student.nameIPA && (
+              <div className="mb-2">
+                <span className="text-sm font-semibold">IPA: </span>
+                <span className="text-sm font-mono">{student.nameIPA}</span>
+              </div>
+            )}
             <p className="text-sm mb-4 flex-grow">{student.description}</p>
             <div className="grid grid-cols-2 gap-2 mb-4">
               {student.favoriteColor && (
@@ -190,7 +215,9 @@ export function StudentCard({ student }: StudentCardProps) {
                 </a>
               )}
             </div>
-            <p className="text-sm text-gray-200">Click to flip back</p>
+            <p className="text-sm text-gray-200 text-center italic">
+              Click to flip back
+            </p>
           </CardContent>
         </Card>
       </motion.div>

@@ -24,7 +24,6 @@ export interface Student {
   email: string;
   major: string;
   year: string;
-  gpa: number;
   image: string;
   country: string;
   nationality: string;
@@ -38,4 +37,7 @@ export interface Student {
   favoriteFood?: string;
   homeCity?: string;
   favoriteShow?: string;
+  gender: string;
+  nameIPA?: string;
+  pronouns: string; // New field
 }

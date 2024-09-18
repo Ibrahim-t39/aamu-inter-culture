@@ -1,21 +1,15 @@
 "use client";
 
+import { EventFilters } from "@/components/EventFilters";
+import { EventList } from "@/components/EventList";
+import { EventTags } from "@/components/EventTags";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { events } from "@/lib/constant/constant";
 import { isBefore, isToday } from "date-fns";
 import { useState } from "react";
-import { EventFilters } from "../../components/EventFilters";
-import { EventList } from "../../components/EventList";
-import { EventTags } from "../../components/EventTags";
-import { Event } from "../../components/types";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "../../components/ui/tabs";
-import { aamuColors, events } from "../../lib/constant/constant";
 
 export default function EventsPage() {
-  const [date, setDate] = useState<Date | undefined>();
+  const [date, setDate] = useState<Date>();
   const [category, setCategory] = useState("All");
   const [eventType, setEventType] = useState("All");
   const [organizer, setOrganizer] = useState("All");
@@ -24,7 +18,7 @@ export default function EventsPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
-  const filteredEvents = events.filter((event: Event) => {
+  const filteredEvents = events.filter((event) => {
     const dateMatch =
       !date || event.date.toDateString() === date.toDateString();
     const categoryMatch = category === "All" || event.category === category;
@@ -86,14 +80,8 @@ export default function EventsPage() {
   };
 
   return (
-    <div
-      className="container mx-auto px-4 py-8"
-      style={{ backgroundColor: aamuColors.background }}
-    >
-      <h1
-        className="text-4xl font-bold text-center mb-8"
-        style={{ color: aamuColors.primary }}
-      >
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-4xl font-bold text-center mb-8 text-[#660000]">
         Campus Events
       </h1>
 
@@ -114,19 +102,10 @@ export default function EventsPage() {
       <EventTags selectedTags={selectedTags} toggleTag={toggleTag} />
 
       <Tabs defaultValue="all" className="mb-8">
-        <TabsList
-          className="w-full justify-start"
-          style={{ backgroundColor: `${aamuColors.primary}20` }}
-        >
-          <TabsTrigger value="all" style={{ color: aamuColors.primary }}>
-            All Events
-          </TabsTrigger>
-          <TabsTrigger value="starred" style={{ color: aamuColors.primary }}>
-            Starred Events
-          </TabsTrigger>
-          <TabsTrigger value="attending" style={{ color: aamuColors.primary }}>
-            Attending Events
-          </TabsTrigger>
+        <TabsList>
+          <TabsTrigger value="all">All Events</TabsTrigger>
+          <TabsTrigger value="starred">Starred Events</TabsTrigger>
+          <TabsTrigger value="attending">Attending Events</TabsTrigger>
         </TabsList>
         <TabsContent value="all">
           {filteredEvents.length === 0 ? (
@@ -150,7 +129,7 @@ export default function EventsPage() {
             </p>
           ) : (
             <EventList
-              events={events.filter((event: Event) =>
+              events={events.filter((event) =>
                 starredEvents.includes(event.id)
               )}
               starredEvents={starredEvents}
@@ -167,7 +146,7 @@ export default function EventsPage() {
             </p>
           ) : (
             <EventList
-              events={events.filter((event: Event) =>
+              events={events.filter((event) =>
                 attendingEvents.includes(event.id)
               )}
               starredEvents={starredEvents}

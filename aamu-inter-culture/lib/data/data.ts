@@ -7,7 +7,6 @@ export const students: Student[] = [
     email: "john.doe@aamu.edu",
     major: "Computer Science",
     year: "Senior",
-    gpa: 3.8,
     image: "/placeholder.svg?height=400&width=400",
     country: "United States",
     nationality: "US",
@@ -21,6 +20,9 @@ export const students: Student[] = [
     favoriteFood: "Pizza",
     homeCity: "New York",
     favoriteShow: "Stranger Things",
+    gender: "Male",
+    nameIPA: "dʒɒn doʊ",
+    pronouns: "he/him",
   },
   {
     id: "2",
@@ -28,7 +30,6 @@ export const students: Student[] = [
     email: "jane.smith@aamu.edu",
     major: "Electrical Engineering",
     year: "Junior",
-    gpa: 3.9,
     image: "/placeholder.svg?height=400&width=400",
     country: "Canada",
     nationality: "CA",
@@ -41,6 +42,9 @@ export const students: Student[] = [
     favoriteFood: "Sushi",
     homeCity: "Toronto",
     favoriteShow: "The Office",
+    gender: "Female",
+    nameIPA: "dʒeɪn smɪθ",
+    pronouns: "she/her",
   },
   // Add more students here...
 ];
