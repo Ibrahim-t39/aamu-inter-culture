@@ -30,8 +30,14 @@ interface StudentCardProps {
 export function StudentCard({ student }: StudentCardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
 
-  const handleClick = () => {
-    setIsFlipped(!isFlipped);
+  const handleClick = (e: React.MouseEvent) => {
+    if (!(e.target as HTMLElement).closest("a")) {
+      setIsFlipped(!isFlipped);
+    }
+  };
+
+  const handleSocialClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
   };
 
   return (
@@ -48,13 +54,13 @@ export function StudentCard({ student }: StudentCardProps) {
         style={{ transformStyle: "preserve-3d" }}
       >
         <Card
-          className="w-full h-full absolute backface-hidden"
+          className="w-full h-full absolute backface-hidden overflow-hidden"
           style={{
             borderColor: aamuColors.primary,
-            background: `linear-gradient(135deg, ${aamuColors.primary} 0%, ${aamuColors.primary}80 100%)`,
           }}
         >
-          <CardContent className="p-6 flex flex-col h-full text-white">
+          <div className="absolute inset-0 bg-gradient-to-r from-[#660000] via-[#990000] to-[#660000] animate-gradient-x"></div>
+          <CardContent className="p-6 flex flex-col h-full text-white relative z-10">
             <div className="flex items-start mb-6">
               <div className="relative h-24 w-24 rounded-full overflow-hidden mr-4 border-4 border-white shadow-lg">
                 <Image
@@ -116,8 +122,8 @@ export function StudentCard({ student }: StudentCardProps) {
             <Badge
               className="mb-4 self-start px-3 py-1"
               style={{
-                backgroundColor: aamuColors.secondary,
-                color: aamuColors.primary,
+                backgroundColor: `${aamuColors.secondary}80`,
+                color: "white",
               }}
             >
               {student.funFact}
@@ -129,14 +135,14 @@ export function StudentCard({ student }: StudentCardProps) {
         </Card>
 
         <Card
-          className="w-full h-full absolute backface-hidden"
+          className="w-full h-full absolute backface-hidden overflow-hidden"
           style={{
             borderColor: aamuColors.primary,
-            background: `linear-gradient(135deg, ${aamuColors.primary}80 0%, ${aamuColors.primary} 100%)`,
             transform: "rotateY(180deg)",
           }}
         >
-          <CardContent className="p-6 flex flex-col h-full text-white">
+          <div className="absolute inset-0 bg-gradient-to-r from-[#660000] via-[#990000] to-[#660000] animate-gradient-x"></div>
+          <CardContent className="p-6 flex flex-col h-full text-white relative z-10">
             <h3 className="text-2xl font-bold mb-4">{student.name}</h3>
             {student.nameIPA && (
               <div className="mb-2">
@@ -183,8 +189,9 @@ export function StudentCard({ student }: StudentCardProps) {
                   href={student.website}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={handleSocialClick}
                 >
-                  <Globe className="h-5 w-5 text-white" />
+                  <Globe className="h-5 w-5 text-white hover:text-[#ffffffcc]" />
                 </a>
               )}
               {student.linkedin && (
@@ -192,8 +199,9 @@ export function StudentCard({ student }: StudentCardProps) {
                   href={student.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={handleSocialClick}
                 >
-                  <Linkedin className="h-5 w-5 text-white" />
+                  <Linkedin className="h-5 w-5 text-white hover:text-[#ffffffcc]" />
                 </a>
               )}
               {student.twitter && (
@@ -201,8 +209,9 @@ export function StudentCard({ student }: StudentCardProps) {
                   href={student.twitter}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={handleSocialClick}
                 >
-                  <Twitter className="h-5 w-5 text-white" />
+                  <Twitter className="h-5 w-5 text-white hover:text-[#ffffffcc]" />
                 </a>
               )}
               {student.github && (
@@ -210,8 +219,9 @@ export function StudentCard({ student }: StudentCardProps) {
                   href={student.github}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={handleSocialClick}
                 >
-                  <Github className="h-5 w-5 text-white" />
+                  <Github className="h-5 w-5 text-white hover:text-[#ffffffcc]" />
                 </a>
               )}
             </div>

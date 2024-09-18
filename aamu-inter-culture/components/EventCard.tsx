@@ -50,10 +50,12 @@ export function EventCard({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-[#66000080] to-[#99000080] opacity-75 transition-opacity duration-300 ease-in-out" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#66000040] to-[#99000040] opacity-75 transition-opacity duration-300 ease-in-out" />
       <CardHeader className="relative z-10">
         <div className="flex justify-between items-start">
-          <CardTitle className="text-[#660000]">{event.title}</CardTitle>
+          <CardTitle className="text-[#660000] font-bold">
+            {event.title}
+          </CardTitle>
           <IconComponent
             className={`h-6 w-6 ${
               isHovered ? "text-[#660000]" : "text-gray-600"
@@ -93,7 +95,7 @@ export function EventCard({
         </div>
       </CardContent>
       <CardFooter className="flex flex-wrap justify-between items-center gap-2 relative z-10">
-        <Badge className="bg-[#660000] text-white">{event.category}</Badge>
+        <Badge className="bg-[#660000]/80 text-white">{event.category}</Badge>
         <div className="flex gap-2">
           {event.isKeyEvent && (
             <Star className="h-4 w-4 text-yellow-600" aria-label="Key Event" />
@@ -113,7 +115,7 @@ export function EventCard({
             variant={isStarred ? "secondary" : "outline"}
             size="sm"
             onClick={() => toggleStarred(event.id)}
-            className={`bg-white/60 text-gray-800 hover:bg-[#660000] hover:text-white transition-colors duration-300`}
+            className={`bg-white/60 text-gray-800 hover:bg-[#660000]/80 hover:text-white transition-colors duration-300`}
           >
             <Star
               className={cn("h-4 w-4 mr-1", isStarred ? "fill-current" : "")}
@@ -124,7 +126,7 @@ export function EventCard({
             variant={isAttending ? "secondary" : "outline"}
             size="sm"
             onClick={() => toggleAttending(event.id)}
-            className={`bg-white/60 text-gray-800 hover:bg-[#660000] hover:text-white transition-colors duration-300`}
+            className={`bg-white/60 text-gray-800 hover:bg-[#660000]/80 hover:text-white transition-colors duration-300`}
           >
             {isAttending ? "Attending" : "Attend"}
           </Button>
@@ -133,7 +135,7 @@ export function EventCard({
               <Button
                 variant="outline"
                 size="sm"
-                className={`bg-white/60 text-gray-800 hover:bg-[#660000] hover:text-white transition-colors duration-300`}
+                className={`bg-white/60 text-gray-800 hover:bg-[#660000]/80 hover:text-white transition-colors duration-300`}
               >
                 Details
               </Button>

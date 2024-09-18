@@ -6,6 +6,7 @@ import { EventTags } from "@/components/EventTags";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { events } from "@/lib/constant/constant";
 import { isBefore, isToday } from "date-fns";
+import Image from "next/image";
 import { useState } from "react";
 
 export default function EventsPage() {
@@ -80,83 +81,94 @@ export default function EventsPage() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold text-center mb-8 text-[#660000]">
-        Campus Events
-      </h1>
-
-      <EventFilters
-        date={date}
-        setDate={setDate}
-        category={category}
-        setCategory={setCategory}
-        eventType={eventType}
-        setEventType={setEventType}
-        organizer={organizer}
-        setOrganizer={setOrganizer}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        clearFilters={clearFilters}
+    <div className="min-h-screen relative">
+      <Image
+        src="/images/logo/aamuwelcomecenter.jpg"
+        alt="Background"
+        layout="fill"
+        objectFit="cover"
+        quality={100}
       />
+      <div className="absolute inset-0 bg-white/80 overflow-auto">
+        <div className="container mx-auto px-4 py-8 relative z-10">
+          <h1 className="text-4xl font-bold text-center mb-8 text-[#660000]">
+            Campus Events
+          </h1>
 
-      <EventTags selectedTags={selectedTags} toggleTag={toggleTag} />
+          <EventFilters
+            date={date}
+            setDate={setDate}
+            category={category}
+            setCategory={setCategory}
+            eventType={eventType}
+            setEventType={setEventType}
+            organizer={organizer}
+            setOrganizer={setOrganizer}
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            clearFilters={clearFilters}
+          />
 
-      <Tabs defaultValue="all" className="mb-8">
-        <TabsList>
-          <TabsTrigger value="all">All Events</TabsTrigger>
-          <TabsTrigger value="starred">Starred Events</TabsTrigger>
-          <TabsTrigger value="attending">Attending Events</TabsTrigger>
-        </TabsList>
-        <TabsContent value="all">
-          {filteredEvents.length === 0 ? (
-            <p className="text-center text-gray-500 mt-8">
-              No events found for the selected criteria.
-            </p>
-          ) : (
-            <EventList
-              events={filteredEvents}
-              starredEvents={starredEvents}
-              attendingEvents={attendingEvents}
-              toggleStarred={toggleStarred}
-              toggleAttending={toggleAttending}
-            />
-          )}
-        </TabsContent>
-        <TabsContent value="starred">
-          {starredEvents.length === 0 ? (
-            <p className="text-center text-gray-500 mt-8">
-              You haven&apos;t starred any events yet.
-            </p>
-          ) : (
-            <EventList
-              events={events.filter((event) =>
-                starredEvents.includes(event.id)
+          <EventTags selectedTags={selectedTags} toggleTag={toggleTag} />
+
+          <Tabs defaultValue="all" className="mb-8">
+            <TabsList>
+              <TabsTrigger value="all">All Events</TabsTrigger>
+              <TabsTrigger value="starred">Starred Events</TabsTrigger>
+              <TabsTrigger value="attending">Attending Events</TabsTrigger>
+            </TabsList>
+            <TabsContent value="all">
+              {filteredEvents.length === 0 ? (
+                <p className="text-center text-gray-500 mt-8">
+                  No events found for the selected criteria.
+                </p>
+              ) : (
+                <EventList
+                  events={filteredEvents}
+                  starredEvents={starredEvents}
+                  attendingEvents={attendingEvents}
+                  toggleStarred={toggleStarred}
+                  toggleAttending={toggleAttending}
+                />
               )}
-              starredEvents={starredEvents}
-              attendingEvents={attendingEvents}
-              toggleStarred={toggleStarred}
-              toggleAttending={toggleAttending}
-            />
-          )}
-        </TabsContent>
-        <TabsContent value="attending">
-          {attendingEvents.length === 0 ? (
-            <p className="text-center text-gray-500 mt-8">
-              You&apos;re not attending any events yet.
-            </p>
-          ) : (
-            <EventList
-              events={events.filter((event) =>
-                attendingEvents.includes(event.id)
+            </TabsContent>
+            <TabsContent value="starred">
+              {starredEvents.length === 0 ? (
+                <p className="text-center text-gray-500 mt-8">
+                  You haven&apos;t starred any events yet.
+                </p>
+              ) : (
+                <EventList
+                  events={events.filter((event) =>
+                    starredEvents.includes(event.id)
+                  )}
+                  starredEvents={starredEvents}
+                  attendingEvents={attendingEvents}
+                  toggleStarred={toggleStarred}
+                  toggleAttending={toggleAttending}
+                />
               )}
-              starredEvents={starredEvents}
-              attendingEvents={attendingEvents}
-              toggleStarred={toggleStarred}
-              toggleAttending={toggleAttending}
-            />
-          )}
-        </TabsContent>
-      </Tabs>
+            </TabsContent>
+            <TabsContent value="attending">
+              {attendingEvents.length === 0 ? (
+                <p className="text-center text-gray-500 mt-8">
+                  You&apos;re not attending any events yet.
+                </p>
+              ) : (
+                <EventList
+                  events={events.filter((event) =>
+                    attendingEvents.includes(event.id)
+                  )}
+                  starredEvents={starredEvents}
+                  attendingEvents={attendingEvents}
+                  toggleStarred={toggleStarred}
+                  toggleAttending={toggleAttending}
+                />
+              )}
+            </TabsContent>
+          </Tabs>
+        </div>
+      </div>
     </div>
   );
 }
