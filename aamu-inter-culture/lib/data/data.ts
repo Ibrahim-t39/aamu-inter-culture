@@ -10,7 +10,7 @@ export const students: Student[] = [
     image: "/images/logo/lambo.jpg",
 
     country: "Nigeria",
-    nationality: "NG",
+    nationality: "ZM",
     funFact: "My favorite artist is John Legend!",
     description:
       "I like t****** because they prove that I can focus on two things at once.",

@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -24,9 +25,11 @@ import {
   PhoneCall,
   Scale,
   Search,
+  Send,
   Stethoscope,
 } from "lucide-react";
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
+import { Textarea } from "../../components/ui/textarea";
 
 // Sample data structure for resources
 const resourceSections = [
@@ -171,6 +174,7 @@ const faqs = [
 
 export default function ResourcesPage() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [complaint, setComplaint] = useState("");
 
   const filteredSections = resourceSections
     .map((section) => ({
@@ -183,11 +187,19 @@ export default function ResourcesPage() {
     }))
     .filter((section) => section.items.length > 0);
 
+  const handleComplaintSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Here you would typically send the complaint to your backend
+    console.log("Complaint submitted:", complaint);
+    setComplaint("");
+    alert("Your complaint has been submitted. We will review it shortly.");
+  };
+
   return (
     <div
       className="min-h-screen bg-cover bg-center bg-fixed"
       style={{
-        backgroundImage: "url(/placeholder.svg?height=1080&width=1920)",
+        backgroundImage: "url(/images/logo/aamuwelcomecenter.jpg)",
       }}
     >
       <div className="min-h-screen bg-white/60 backdrop-blur-sm">
@@ -258,23 +270,65 @@ export default function ResourcesPage() {
             <h2 className="text-3xl font-bold mb-6 text-[#660000] text-center">
               Frequently Asked Questions
             </h2>
-            <Card className="bg-[#660000]/10 border-[#660000]/30">
+            <Card className="bg-white/80 border-[#660000]/30 shadow-lg">
               <CardContent className="pt-6">
                 <Accordion type="single" collapsible className="w-full">
                   {faqs.map((faq, index) => (
-                    <AccordionItem key={index} value={`item-${index}`}>
-                      <AccordionTrigger className="text-[#660000] hover:text-[#660000]/80">
+                    <AccordionItem
+                      key={index}
+                      value={`item-${index}`}
+                      className="border-b border-[#660000]/20 last:border-b-0"
+                    >
+                      <AccordionTrigger className="text-[#660000] hover:text-[#660000]/80 py-4">
                         <div className="flex items-center">
                           <HelpCircle className="w-5 h-5 mr-2 flex-shrink-0" />
-                          <span className="text-left">{faq.question}</span>
+                          <span className="text-left font-semibold">
+                            {faq.question}
+                          </span>
                         </div>
                       </AccordionTrigger>
-                      <AccordionContent className="text-[#660000]/90">
-                        {faq.answer}
+                      <AccordionContent className="text-[#660000]/90 pb-4">
+                        <p className="pl-7">{faq.answer}</p>
                       </AccordionContent>
                     </AccordionItem>
                   ))}
                 </Accordion>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="mt-12">
+            <h2 className="text-3xl font-bold mb-6 text-[#660000] text-center">
+              Submit a Complaint
+            </h2>
+            <Card className="bg-white/80 border-[#660000]/30 shadow-lg">
+              <CardHeader>
+                <CardTitle className="text-[#660000]">
+                  We Value Your Feedback
+                </CardTitle>
+                <CardDescription className="text-[#660000]/70">
+                  If you have any concerns or complaints, please let us know.
+                  We&apos;re here to help.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleComplaintSubmit}>
+                  <Textarea
+                    placeholder="Describe your complaint or concern here..."
+                    value={complaint}
+                    onChange={(e: {
+                      target: { value: SetStateAction<string> };
+                    }) => setComplaint(e.target.value)}
+                    className="min-h-[100px] text-[#660000] placeholder-[#660000]/50 border-[#660000]/30"
+                  />
+                  <Button
+                    type="submit"
+                    className="mt-4 bg-[#660000] hover:bg-[#660000]/90 text-white"
+                  >
+                    <Send className="w-4 h-4 mr-2" />
+                    Submit Complaint
+                  </Button>
+                </form>
               </CardContent>
             </Card>
           </div>

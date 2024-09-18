@@ -8,15 +8,11 @@ import {
   ChevronLeft,
   ChevronRight,
   ChevronRight as ChevronRightIcon,
-  Facebook,
   Globe2,
   GraduationCap,
-  Instagram,
-  Linkedin,
   School,
   Send,
   Sparkles,
-  Twitter,
   Users,
 } from "lucide-react";
 import Image from "next/image";
@@ -118,7 +114,7 @@ const AboutISASection = () => {
       setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, []);
+  }, [slides.length]);
 
   return (
     <section className="py-20 bg-gradient-to-b from-white to-[#ffeeee]">
@@ -405,81 +401,6 @@ const ContactAndNewsletterSection = () => {
   );
 };
 
-const Footer = () => (
-  <footer className="bg-[#660000] text-white py-12">
-    <div className="container mx-auto px-4">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div className="space-y-4">
-          <h3 className="text-2xl font-bold">AAMU ISA</h3>
-          <p className="text-gray-300">
-            Connecting international students across campus and fostering a
-            diverse, supportive community.
-          </p>
-        </div>
-        <div>
-          <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-          <ul className="space-y-2">
-            {["About Us", "Events", "Resources", "Contact"].map((item) => (
-              <li key={item}>
-                <Link
-                  href={`/${item.toLowerCase().replace(" ", "-")}`}
-                  className="text-gray-300 hover:text-white transition-colors duration-300"
-                >
-                  {item}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
-          <address className="text-gray-300 not-italic">
-            <p>4900 Meridian Street</p>
-            <p>Normal, AL 35762</p>
-            <p className="mt-2">
-              Email:{" "}
-              <a
-                href="mailto:isa@aamu.edu"
-                className="hover:text-white transition-colors duration-300"
-              >
-                isa@aamu.edu
-              </a>
-            </p>
-            <p>Phone: (256) 372-5000</p>
-          </address>
-        </div>
-        <div>
-          <h4 className="text-lg font-semibold mb-4">Follow Us</h4>
-          <div className="flex space-x-4">
-            {[
-              { icon: Facebook, href: "https://facebook.com" },
-              { icon: Twitter, href: "https://twitter.com" },
-              { icon: Instagram, href: "https://instagram.com" },
-              { icon: Linkedin, href: "https://linkedin.com" },
-            ].map((social, index) => (
-              <Link
-                key={index}
-                href={social.href}
-                passHref
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <social.icon className="h-6 w-6 text-gray-300 hover:text-white transition-colors duration-300 hover:scale-110" />
-              </Link>
-            ))}
-          </div>
-        </div>
-      </div>
-      <div className="mt-8 pt-8 border-t border-gray-700 text-center text-gray-300">
-        <p>
-          © {new Date().getFullYear()} AAMU International Student Association -
-          All rights reserved.
-        </p>
-      </div>
-    </div>
-  </footer>
-);
-
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-white">
@@ -488,7 +409,6 @@ export default function LandingPage() {
       <FlagsSection />
       <QuotesSection />
       <ContactAndNewsletterSection />
-      <Footer />
     </div>
   );
 }

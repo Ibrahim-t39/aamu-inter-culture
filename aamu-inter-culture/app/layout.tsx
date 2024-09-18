@@ -1,28 +1,15 @@
-import Navbar from "@/components/Navbar"; // Import the Navbar component
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Inter } from "next/font/google";
+import Footer from "../components/footer";
+import Navbar from "../components/Navbar";
 import "./globals.css";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  display: "swap",
-  preload: true,
-});
-
-const geistMono = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-mono",
-  display: "swap",
-  preload: true,
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "AAMU International Student Association",
   description:
-    "Welcome to the International Student Association at Alabama A&M University",
-  viewport: "width=device-width, initial-scale=1",
-  themeColor: "#ffffff",
+    "Welcome to the Alabama A&M University International Student Association",
 };
 
 export default function RootLayout({
@@ -31,10 +18,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className="antialiased">
-        <Navbar /> {/* Render the Navbar only here */}
-        <main>{children}</main>
+    <html lang="en">
+      <body className={inter.className}>
+        <Navbar />
+        <main className="min-h-screen">{children}</main>
+        <Footer />
       </body>
     </html>
   );
