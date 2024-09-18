@@ -284,3 +284,13 @@ export const events: Event[] = [
   },
   // Add more events here...
 ];
+
+export const majors = [
+  "All",
+  "Computer Science",
+  "Electrical Engineering",
+  "Mechanical Engineering",
+  "Biology",
+  "Chemistry",
+];
+export const years = ["All", "Freshman", "Sophomore", "Junior", "Senior"];

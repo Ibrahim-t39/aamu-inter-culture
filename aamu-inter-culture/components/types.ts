@@ -17,3 +17,25 @@ export interface Event {
   dresscode: string;
   foodServed: boolean;
 }
+
+export interface Student {
+  id: string;
+  name: string;
+  email: string;
+  major: string;
+  year: string;
+  gpa: number;
+  image: string;
+  country: string;
+  nationality: string;
+  funFact: string;
+  description: string;
+  website?: string;
+  linkedin?: string;
+  twitter?: string;
+  github?: string;
+  favoriteColor?: string;
+  favoriteFood?: string;
+  homeCity?: string;
+  favoriteShow?: string;
+}
